@@ -1,0 +1,513 @@
+html, body {
+	margin:0;
+	padding:0;
+	font-family:"Open Sans";
+}
+
+.clearfix:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+h1 {
+	margin-bottom:60px;
+	margin-top:10px;
+	font-size: 30pt;
+}
+
+h3 {
+	font-size: 13pt;
+	font-weight: bold;
+}
+
+#bg-img {
+	position:fixed;
+	width:100%;
+	height:100%;
+	left:0;
+	top:0;
+	background-size:cover;
+	background-position:center center;
+	z-index:-1;
+}
+
+#logo {
+	width:227px;
+	height:48px;
+	background-image:url("../img/logo.png");
+	background-size: cover;
+	background-repeat:no-repeat;
+}
+
+.btn {
+	display:inline-block;
+	color:#fff;
+	font-weight:bold;
+	background-color:#000;
+	padding:10px 5px;
+	margin-left:20px;
+	cursor:pointer;
+    text-align: center;
+	margin-bottom:20px;
+	text-transform: upper-case;
+	text-decoration: none;
+	text-align:center;
+}
+
+.small.btn {
+	padding:5px 5px;
+	font-size:12px;
+}
+
+.float-right { float: right; text-align: right; }
+.float-left { float: left; text-align: left; }
+.italic { font-style: italic; }
+
+/* ******************************************
+                REGISTER PAGE
+****************************************** */
+
+
+#register-container {
+	width: 701px;
+	padding:40px 40px 40px 120px;
+	min-height: 500px;
+	margin:100px auto 0;
+	background-color:rgba(218, 218, 218, 0.9);
+	background-image:url("../img/register-bg2.png");
+	border:2px solid #fff;
+	background-repeat: no-repeat;
+    background-position: bottom;
+	background-size:contain;
+}
+
+body.edit-profile #register-container, body.admin-view-profile #register-container {
+	width:1000px;
+	background-image:none;
+}
+
+
+body.admin #register-container {
+	margin-top:0;
+}
+
+#register-form {
+	width: 460px;
+	display:inline-block;
+}
+
+body.edit-profile #register-form, body.admin-view-profile #register-form {
+	width: 100%;
+}
+
+#register-form .register-tab {
+	height: 450px;
+	overflow-y: auto;
+    width: 100%;
+	font-size: 10pt;
+}
+
+body.edit-profile #register-form .register-tab, body.admin-view-profile .register-tab {
+	width: 700px;
+	height: auto;
+	overflow-y: visible;
+	float:left;
+}
+
+#circles .circle {
+	border:3px solid #fff;
+	width:15px;
+	height:15px;
+	margin-top:10px;
+	margin-right:5px;
+	border-radius:50%;
+	display:inline-block;
+	cursor:pointer;
+}
+
+#circles .full.circle {
+	border:3px solid #000;
+	background-color:#000;
+	cursor:auto;
+}
+
+.form-element {
+	margin: 10px 0;
+	display:table;
+}
+
+.element {
+	display: table-cell;
+}
+
+.form-element label {
+	width:170px;
+	display: table-cell;
+    vertical-align: top;
+}
+
+input, select, textarea {
+	width:250px;
+    margin-bottom: 3px;
+}
+
+textarea {
+	height:100px;
+}
+
+input.other {
+	display:none;
+}
+
+select {
+	padding: 1px;
+    -ms-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+#buttons {
+	height:450px;
+	position:relative;
+	width:200px;
+}
+
+body.edit-profile #buttons {
+	height: auto;
+}
+
+
+body.edit-profile #next-button, body.edit-profile #back-button, body.edit-profile #register-button, body.edit-profile .g-recaptcha {
+	display:none !important;
+}
+
+#update-button {
+	margin-top:30px;
+}
+
+#buttons-inner {
+	position:absolute;
+	bottom:0;
+	width:100%;
+	text-align:right;
+}
+
+#buttons #add-licence-button {
+	display:block;
+	margin:0 0 10px;
+}
+
+#buttons #back-button {
+	float: left;
+    margin: 0;
+}
+
+.remove-licence {
+	color:#ff0000;
+	opacity:0.6;
+	transition:0.3s;
+	cursor:pointer;
+	margin-left:20px;
+}
+
+.remove-exp, .remove-instr-exp, .remove-emp-exp, .remove {
+	color:#ff0000;
+	opacity:0.6;
+	transition:0.3s;
+	cursor:pointer;
+	margin-right:20px;
+}
+
+.remove a {
+	color:#ff0000;
+	transition:0.3s;
+}
+
+.remove-licence:hover, .remove-exp:hover, .remove-instr-exp:hover, .remove-emp-exp:hover, .remove:hover, .remove a:hover {
+	opacity:1;
+}
+
+#add-experience {
+	background-color:#D1D5D8;
+	padding:15px 7px;
+}
+
+#pw-strength {
+	height:29px;
+	line-height:29px;
+	text-align:center;
+	background-color:#fff;
+	width:250px;
+}
+
+
+
+#telno-code { width: 70px; }
+#telno-1 { width: 65px; }
+#telno-2 { width: 100px; }
+
+.ui-datepicker-trigger {
+	border: none;
+    background: none;
+    position: relative;
+    margin-left: -22px;
+    margin-top: 2px;
+}
+
+#lightbox {
+	position:fixed;
+	left:10%;
+	padding:20px;
+	right:10%;
+	top:10%;
+	bottom:10%;
+	background:#fff;
+	-webkit-box-shadow: 4px 4px 30px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 4px 4px 30px 0px rgba(0,0,0,0.75);
+	box-shadow: 4px 4px 30px 0px rgba(0,0,0,0.75);
+	z-index:10;
+	display:none;
+}
+
+#backdrop {
+	position:fixed;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	background:#000;
+	opacity:0.5;
+	z-index:9;
+	display:none;
+	cursor:pointer;
+}
+
+.half {
+	width:50%;
+	float:left;
+}
+
+.ajax-spinner {
+	display:none;
+	background-image:url(../img/ajax-loader.gif);
+	height:32px;
+	width:32px;
+}
+
+.update-prof-pic {
+	position: absolute;
+    right: 0;
+}
+
+iframe {
+	border:0;
+}
+
+/* ********************************************
+               ADMIN PAGE 
+******************************************** */
+
+#all-pilots {
+	display:table;
+}
+
+#all-pilots .pilot-row {
+	display:table-row;
+}
+
+#all-pilots .pilot-row .pilot-number {
+	min-width:50px;
+}
+
+#all-pilots .pilot-row .pilot-name {
+	min-width:200px;
+}
+
+#all-pilots .pilot-row div {
+	display:table-cell;
+	vertical-align:middle;
+}
+
+#all-pilots .pilot-button .btn {
+	text-decoration:none;
+	padding:5px 0;
+	font-size:14px;
+	width:130px;
+}
+
+.btn { transition: 0.4s; }
+.btn:hover { background-color:#3333ff; }
+
+#loader {
+    position: absolute;
+}
+
+#pilot-search {
+	padding:7px 5px;
+	margin-bottom:20px;
+}
+
+#admin-tabs {
+    width: 865px;
+    height: 34px;
+    margin: 100px auto 0;
+}
+
+#admin-tabs .tab {
+    background-color: rgba(218, 218, 218, 0.9);
+	float:left;
+	margin-right:3px;
+	border: 2px solid #fff;
+	border-bottom:0;
+	border-top-left-radius:2px;
+	border-top-right-radius:2px;
+	font-weight:bold;
+	padding:5px 15px;
+	cursor:pointer;
+}
+
+#admin-tabs .tab.active {
+	border-bottom:2px solid #DADADA;
+}
+
+#emails-tab .form-element {
+	width:100%;
+}
+
+#emails-tab .form-element label {
+	width:40%;
+}
+
+#emails-tab .form-element .element {
+	width:60%;
+}
+
+#emails-tab .form-element .element textarea, #emails-tab .form-element .element input {
+	width:100%;
+}
+
+.mobile-only {
+	display:none;
+}
+
+
+@media screen and (max-width:800px)
+{
+	* {
+		max-width:100%;
+	}
+	
+	.mobile-only {
+		display:block;
+	}
+	
+	.half {
+		width:100%;
+	}
+	
+	#register-container, body.edit-profile #register-container , body.admin-view-profile #register-container {
+		margin:0;
+		width:90%;
+		padding-left:5%;
+		padding-right:5%;
+		border: 0;
+	}
+	
+	body.edit-profile #logo, body.admin-view-profile #logo {
+		margin-bottom:20px;
+	}
+	
+	#open-menu {
+		width:100%;
+		text-align:center;
+		font-weight:600;
+		font-size:20px;
+		margin: 0;
+		padding: 10px 0;
+	}
+	
+	#open-menu:before {
+		content:'\f0c9';
+		font-family: 'FontAwesome';
+		border-radius:50%;
+		padding:3px;
+		margin-right:10px;
+		font-size: 14px;
+		border:2px solid #000;
+	}
+	
+	body.edit-profile #register-form, body.admin-view-profile #profile-pic {
+		margin-top:20px;
+	}
+	
+	body.edit-profile #circles, body.admin-view-profile #circles {
+		display:none;
+	}
+	
+	
+	
+	#circles .btn {
+	    display: block;
+		margin: 2px 0;
+	}
+	
+	.float-right, .float-left {
+		display:block;
+		float:none;
+		margin-left:auto;
+		margin-right:auto;
+		text-align:center;
+	}
+	
+	.float-right div, .float-left div {
+		margin-left:auto;
+		margin-right:auto;
+	}
+	
+	h1 {
+		margin-bottom: 20px;
+	}
+	
+	.form-element, .form-element .element, .form-element label {
+		display:block;
+	}
+	
+	#buttons {
+		height: auto;
+		position: static;
+		width: 100%;
+	}
+	
+	#buttons #buttons-inner {
+		position: static;
+		bottom: auto;
+		width: 100%;
+	}
+	
+	
+	#all-pilots .pilot-row div {
+		float:left;
+		display:block;
+		padding:5px;
+	}
+	
+	#admin-tabs { display:none; }
+	.mobile-only { display: block !important; }
+	.mobile-only #circles { display:none; }
+	
+	body.admin .mobile-only { margin-bottom:20px;}
+	
+	body.admin #emails-tab {
+		text-align: center;
+	}
+	
+	body.admin #emails-tab .btn {
+		width: 200px;
+		text-align: center;
+		margin: 10px 0;
+	}
+}

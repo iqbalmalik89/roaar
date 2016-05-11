@@ -1,0 +1,216 @@
+html,body {
+	margin:0;
+	text-align:center;
+}
+
+#bgimage {
+	background-image:url('../img/homepage-bg.jpg');
+	background-position: center;
+	background-size:cover;
+	position:fixed;
+	z-index:-1;
+    width: 100%;
+    height: 100%;
+}
+
+#logo {
+	top:50%;
+	margin-top:-265px;
+	width:100%;
+	position:fixed;
+	background:none!important;
+}
+
+#contact {
+	top:50%;
+	margin-top:180px;
+	width:100%;
+	position:fixed;
+}
+
+
+/* *************************************************
+           KARL'S CONTACT FORM CSS STARTS
+************************************************* */
+
+.cfbutton {
+	display: inline-block;
+	width: auto;
+	height: auto;
+	border-width: 0;
+	text-align: center;
+	cursor: pointer;
+	outline: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-color: transparent;
+	color: #565656;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #565656;
+	-webkit-transition: 0.1s background-color linear, 0.1s color linear;
+	-moz-transition: 0.1s background-color linear, 0.1s color linear;
+	-o-transition: 0.1s background-color linear, 0.1s color linear;
+	transition: 0.1s background-color linear, 0.1s color linear;
+	font-family: "proxima-nova",sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 600;
+	font-style: normal;
+    font-size: 14px;
+}
+
+.cfbutton a {
+	text-decoration:none;
+	padding: 1em 2.5em;
+	display:block;
+	color: #565656;
+	-webkit-transition: 0.1s color linear;
+	-moz-transition: 0.1s color linear;
+	-o-transition: 0.1s color linear;
+	transition: 0.1s color linear;
+}
+
+.cfbutton a:hover {
+	text-decoration:none;
+	color: #fff;
+}
+
+
+
+.cfbutton:hover {
+    background-color: #565656;
+	color:#fff;
+}
+
+#backdrop {
+	position:fixed;
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+	background-color:#000;
+	opacity:0.5;
+	z-index:10;
+	display:none;
+}
+
+#cf {
+	position:absolute;
+	top:30px;
+	left:50%;
+	margin-left:-400px;
+	padding:50px;
+	background-color:#fff;
+	width:700px;
+	z-index:11;
+	display:none;
+	color: #222;
+	margin-bottom:30px;
+	text-align:left;
+}
+
+#cf input[type="text"], #cf input[type="email"], #cf textarea {
+	width: 100%;
+    padding: 12px;
+    margin: 6px 0 4px;
+    border: 1px solid #ccc;
+    background: #fafafa;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: normal;
+    box-sizing: border-box;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-size: 14px;
+}
+
+#cf textarea {
+	height:100px;
+}
+
+#cf .form-title {
+	font-size: 22px;
+    line-height: 1.2em;
+    margin-right: 22px;
+    color: #333;
+}
+
+#closecf {
+	float: right;
+    position: absolute;
+    color: #333;
+    font-size: 22px;
+    width: 22px;
+    line-height: 22px;
+    top: 40px;
+    right: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.half-left {
+	width:49%;
+	margin-right:1%;
+	display:inline-block;
+	margin-bottom:20px;
+	}
+
+.half-right {
+	width:49%;
+	margin-left:1%;
+	display:inline-block;
+	margin-bottom:20px;
+}
+
+.full {
+	width:100%;
+	margin-bottom:20px;
+}
+
+@media screen and (max-height:532px)
+{
+	#logo {
+		margin-top: -175px;
+    }
+	
+	#contact {
+		margin-top: 130px;
+	}
+}
+
+
+@media screen and (max-width:800px)
+{
+	
+	#logo {
+		width:90%;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+	
+	#logo img {
+		width:100%;
+	}
+	
+	#cf {
+		width:80%;
+		padding-left:5%;
+		padding-right:5%;
+		margin-left:5%;
+		margin-right:5%;
+		left:0;
+		right:0;
+	}
+	
+	.half-left, .half-right {
+		width:100%;
+		margin-left:0;
+		margin-right:0;
+	}
+}
+
+/* *************************************************
+           KARL'S CONTACT FORM CSS ENDS
+************************************************* */
