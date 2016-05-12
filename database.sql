@@ -68,7 +68,9 @@ CREATE TABLE `email` (
 
 INSERT INTO `email` (`emailID`, `name`, `subject`, `message`) VALUES
 (1, 'Airline Interested', 'Airline Interested', 'Hi [fname] [sname],\n\nThere is an airline interested in you!\n\nRegards,\nROAAR'),
-(2, 'Interview Requested', 'Interview Requested', 'Hi [fname],\n\nThere is an interview requested.\n\nRegards,\nROAAR');
+(2, 'Interview Requested', 'Interview Requested', 'Hi [fname],\n\nThere is an interview requested.\n\nRegards,\nROAAR’),
+(3,'Registration Email','Registration Email','Hi [fname],\n\nYou successfully registered. \nThank you for creating accout in ROAAR\n\nRegards,\nROAAR');
+
 
 -- --------------------------------------------------------
 

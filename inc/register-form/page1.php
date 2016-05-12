@@ -35,7 +35,7 @@ Please enter your personal details below
 		Date of Birth: *
 	</label>
 	<div class='element'>
-		<input type='text' class='datepicker' name='dob' id='dob'>
+		<input type='text' class='datepicker' name='dob' id='dob' readonly>
 	</div>
 </div>
 
