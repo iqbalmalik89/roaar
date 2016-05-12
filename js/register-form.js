@@ -6,6 +6,19 @@ showrelevantbuttons();
 // ************
 
 $( '#next-button' ).click( function() {
+	
+	var validate_op = {'fname':$('#fname').val(),'sname':$('#sname').val(),'email':$('#email').val(),'dob':$('#dob').val(),'cemail':$('#email-confirm').val(),'type_of_work':'type_of_work',
+	'passport1no':$('#passport1no').val(),'passport1country':'passport1country','passport1date':$('#passport1-date').val(),
+	'passport1expiry':$('#passport1-expiry').val(),
+	'medical_date':$('#medical-date').val(),'medical_dateexp':$('#medical-dateexp').val(),
+	'current_page':currentpage};
+	
+	chk_validatation = validateMe(validate_op);
+	if(chk_validatation ==false){
+		return false;
+	}
+	$('#msgs').html('');
+	$('#msgs').removeClass('msg_cancel');
 	currentpage = currentpage+1;
 	showrelevantbuttons();
 	$( '.register-tab:visible' ).fadeOut(200, function() {
@@ -60,7 +73,7 @@ $( 'form' ).submit(function( e ) {
 	donotsubmit = false;
 	$( this ).find( '.datepicker' ).each( function() {
 		var theukformat = $( this ).val();
-		if ( /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/.test(theukformat) || theukformat == "" )
+		/*if ( /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/.test(theukformat) || theukformat == "" )
 		{
 			//do nada
 		}
@@ -80,7 +93,7 @@ $( 'form' ).submit(function( e ) {
 			e.preventDefault();
 			donotsubmit = true;
 			return false;
-		}
+		}*/
 		
 		theukformat = theukformat.split('/');
 		var thecorrectformat = theukformat[2] + "-" + theukformat[1] + "-" + theukformat[0];
@@ -89,6 +102,24 @@ $( 'form' ).submit(function( e ) {
 });
 
 $( '#register-form' ).submit(function( e ) {
+	
+	var msg_step8='';
+	if($.trim($('#hear-about').find('option:selected').text())=="Select an Option"){ msg_step8+= 'How you hear  is required.|';}
+	if($.trim($('#password').val())==""){msg_step8+="Password is required|";}
+	if($.trim($('#password-confirm').val())==""){msg_step8+="Confirm password is required|";}
+	if($.trim($('#password-confirm').val())!='' && $.trim($('#password').val()!='')){
+		if($.trim($('#password-confirm').val())!=$.trim($('#password').val())){
+			msg_step8+="Passoword mis -matchting|";
+		}
+	}
+	if(msg_step8){
+		var formatted_msgs= getFormatedMessages(msg_step8);
+		$('#msgs').addClass('msg_cancel');
+		$('#msgs').html(formatted_msgs);
+		return false;
+	}
+
+	
 	if (!donotsubmit) {
 		if ( $( "#email" ).val() != $( "#email-confirm" ).val() )
 		{
@@ -469,3 +500,235 @@ $( '#open-menu' ).click( function() {
 	else
 		$( '#circles' ).slideDown();
 });
+
+/*Validation of Forms*/
+function validateMe(val_obj){
+	var msg_step1= '';
+	var msg_step2= '';
+	var msg_step3= '';
+	var msg_step4= '';
+	var msg_step5= '';
+	var msg_step6= '';
+	var msg_step7= '';
+	var msg_step8= '';
+	var msgs = '';
+		
+	
+	
+	
+	/*Step1*/
+	if(val_obj.current_page==1){
+	if($.trim(val_obj.fname)==""){ msg_step1=  'First name is required.|';}
+	if($.trim(val_obj.sname)==""){ msg_step1+= 'Surname name is required.|';}
+	if($.trim(val_obj.email)==""){ msg_step1+= 'Email is required.|';}
+	
+	if($.trim(val_obj.dob)=="")	 { msg_step1+= 'Date of birth is required.|';}
+	if($.trim(val_obj.email)!=""){
+		if(!validateEmail(val_obj.email)){ msg_step1+= 'Valid email is required.|';}
+		else{
+			if($.trim(val_obj.cemail)==""){ msg_step1+= 'Confirm email is required.|';}
+			if(!validateEmail(val_obj.cemail)){ msg_step1+= 'Valid confirm email is required.|';}
+			if($.trim(val_obj.email) != $.trim(val_obj.cemail)){msg_step1+= 'Email mis-matching.|';}
+			
+		}
+	}
+	if(msg_step1){
+		formatted_msgs= getFormatedMessages(msg_step1);
+		$('#msgs').addClass('msg_cancel');
+		$('#msgs').html(formatted_msgs);
+		return false;
+	}
+ }
+ /*Step-2*/
+ if(val_obj.current_page==2){
+		
+		if($.trim($('#'+val_obj.type_of_work).find('option:selected').text())=="Please select"){ msg_step2+= 'Contract type is required.|';}
+		if(msg_step2){
+		formatted_msgs= getFormatedMessages(msg_step2);
+		$('#msgs').addClass('msg_cancel');
+		$('#msgs').html(formatted_msgs);
+		return false;
+	}
+ }
+ /*Step-3*/
+ if(val_obj.current_page==3){
+		
+		if($.trim(val_obj.passport1no)==""){ msg_step3+=  'Passport number is required.|';}
+		if($.trim($('#'+val_obj.passport1country).find('option:selected').text())=="Please select a country"){ msg_step3+= 'Country name is required.|';}
+		if($.trim(val_obj.passport1date)==""){ msg_step3+=  'Passport issue date is required.|';}
+		if($.trim(val_obj.passport1expiry)==""){ msg_step3+=  'Passport expiry date is required.|';}
+		if(msg_step3){
+		formatted_msgs= getFormatedMessages(msg_step3);
+		$('#msgs').addClass('msg_cancel');
+		$('#msgs').html(formatted_msgs);
+		return false;
+	}
+ }
+ /*Step-4*/
+ 
+	if(val_obj.current_page==4){
+		
+		if($.trim(val_obj.medical_date)==""){ msg_step4+=  'Date Of last medical is required.|';}
+		if($.trim(val_obj.medical_dateexp)==""){ msg_step4+=  'Date Of last medical expiry is required.|';}
+		
+		var msg_step_mul_lcience ='';
+        var chks = document.getElementsByName('licence-no[]');//here rr[] is the name of the textbox 
+        for (var i = 0; i < chks.length; i++) {   
+			if (chks[i].value=="") { msg_step_mul_lcience+=  'licence:'+(i+1)+' number is required.|';}
+		}
+		
+		var msg_lc_type ='';
+        var lc_type=document.getElementsByName('licence-type[]'), c, i=0;
+		while(c=lc_type[i++]){
+		if(c.value =='Select Licence Type'){
+			msg_lc_type+=  'licence:'+(i)+' type is required.|';
+		}
+		}
+		var msg_coi_type ='';
+        var lc_type=document.getElementsByName('licence-coi[]'), c, i=0;
+		while(c=lc_type[i++]){
+		if(c.value =='Please select a country'){
+			msg_coi_type+=  'Country:'+(i)+' of issue is required.|';
+		}
+		}
+		var msg_lc_op_type ='';
+        var lc_type=document.getElementsByName('licence-typeratings[]'), c, i=0;
+		while(c=lc_type[i++]){
+		if(c.value =='Please select a country'){
+			msg_lc_op_type+=  'Type rating:'+(i)+' is required.|';
+		}
+		}
+		
+		var msg_date_of_issue ='';
+        var chks = document.getElementsByName('licence-doi[]');
+        for (var i = 0; i < chks.length; i++) {   
+			if (chks[i].value=="") { msg_date_of_issue+=  'Date of issue:'+(i+1)+'  is required.|';}
+		}
+		var msg_date_of_ex ='';
+        var chks = document.getElementsByName('licence-doe[]');
+        for (var i = 0; i < chks.length; i++) {   
+			if (chks[i].value=="") { msg_date_of_issue+=  'Date of expiry:'+(i+1)+'  is required.|';}
+		}
+		
+		msg_step4+=msg_step_mul_lcience;
+		msg_step4+=msg_lc_type;
+		msg_step4+=msg_coi_type;
+		msg_step4+=msg_lc_op_type;
+		msg_step4+=msg_date_of_issue;
+		msg_step4+=msg_date_of_ex;
+		if(msg_step4){
+		formatted_msgs= getFormatedMessages(msg_step4);
+		$('#msgs').addClass('msg_cancel');
+		$('#msgs').html(formatted_msgs);
+		return false;
+	}
+ }
+ /*Step -5 */
+ if(val_obj.current_page==5){
+		if($.trim($('#proficiency-check').val())==""){
+			msg_step5='Date of last proficiency is required|';
+		}
+		if($.trim($('#proficiency-renewal').val())==""){
+			msg_step5+='Renewal date is required';
+		}
+		if($.trim($('#instrument-check').val())==""){
+			msg_step5+='Instrumental last date is required|';
+		}
+		if($.trim($('#instrument-renewal').val())==""){
+			msg_step5+='Instrumental renewal date is required|';
+		}
+		if($.trim($('#captain-time').val())==""){
+			msg_step5+="Captain's time is required|";
+		}
+		if($.trim($('#total-firstofficer-time').val())==""){
+			msg_step5+="First officer's time is required|";
+		}
+		if($.trim($('#total-instructor-time').val())==""){
+			msg_step5+="Total insturctor's time is required|";
+		}
+		if($.trim($('#add-captain-time').val())==""){
+			msg_step5+="Add captain's time is required|";
+		}
+		if($.trim($('#add-firstofficer-time').val())==""){
+			msg_step5+="Add first officer's time is required|";
+		}
+		if($.trim($('#add-instructor-time').val())==""){
+			msg_step5+="Add instructor's time is required|";
+		}
+		if($.trim($('#add-dateoflastflight').val())==""){
+			msg_step5+="Date of last flight is required|";
+		}
+		if(msg_step5){
+		formatted_msgs= getFormatedMessages(msg_step5);
+		$('#msgs').addClass('msg_cancel');
+		$('#msgs').html(formatted_msgs);
+		return false;
+	}
+}
+/*Step -6*/
+if(val_obj.current_page==6){
+	if($.trim($('#training-type').find('option:selected').text())=="Select Type of Training"){ msg_step6+= 'Type of training is required.|';}
+	if($.trim($('#airline-company').find('option:selected').text())=="Select an option"){ msg_step6+= 'Air line comapny is required.|';}
+	if(msg_step6){
+		formatted_msgs= getFormatedMessages(msg_step6);
+		$('#msgs').addClass('msg_cancel');
+		$('#msgs').html(formatted_msgs);
+		return false;
+	}
+}
+
+/*Step -7*/
+if(val_obj.current_page==7){
+	
+	if($.trim($('#history-airline-company').val())==""){msg_step7+="Add you airline is required|";}
+	if($.trim($('#history-from').val())==""){msg_step7+="From date is required|";}
+	if($.trim($('#history-to').val())==""){msg_step7+="To date is required|";}
+	if($.trim($('#history-position').val())==""){msg_step7+="History position is required|";}
+	if($.trim($('#history-leaving').val())==""){msg_step7+="Reason of leaving is required|";}
+	if(msg_step7){
+		formatted_msgs= getFormatedMessages(msg_step7);
+		$('#msgs').addClass('msg_cancel');
+		$('#msgs').html(formatted_msgs);
+		return false;
+		}
+}
+/*Step -8*/
+if(val_obj.current_page==8){
+	
+	if($.trim($('#hear-about').find('option:selected').text())=="Select an Option"){ msg_step8+= 'How you hear  is required.|';}
+	if($.trim($('#password').val())==""){msg_step8+="Password is required|";}
+	if($.trim($('#password-confirm').val())==""){msg_step8+="Confirm password is required|";}
+	if($.trim($('#password-confirm').val())!='' && $.trim($('#password').val()!='')){
+		if($.trim($('#password-confirm').val())!=$.trim($('#password').val())){
+			msg_step8+="Passoword mis -matchting|";
+		}
+	}
+	if(msg_step8){
+		formatted_msgs= getFormatedMessages(msg_step8);
+		$('#msgs').addClass('msg_cancel');
+		$('#msgs').html(formatted_msgs);
+		return false;
+	}
+}
+ 
+
+	return true;
+}
+
+function getFormatedMessages(msg){
+    if(msg){
+        all_mass =  msg.split("|");
+        var err = "<ul>";
+        for(i=0;i<all_mass.length;i++){
+            if(all_mass[i]) {
+                err += "<li>" + all_mass[i] + "</li>";
+            }
+        }
+        err+="</ul>";
+        return err;
+    }
+}
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
