@@ -5,7 +5,30 @@ require_once "inc/header.php";
 ?>
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
 <script src='https://www.google.com/recaptcha/api.js'></script>
-
+<style>
+.msg_cancel, .msg_ok, .msg_error {
+    background-color: #f2dede !important;
+    border-radius: 5px !important;
+    border: 1px solid #eed3d7 !important;
+    clear: both !important;
+    color: #b94a48 !important;
+    display: block !important;
+    font: 700 12px/14px arial !important;
+    margin: -3px 0 10px !important;
+    padding: 6px 0.5% !important;
+    text-align: center !important;
+    width: 50%;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5 !important);
+}
+.msg_cancel ul, .msg_ok ul, .msg_error ul {
+    margin: 0;
+}
+.msg_cancel li, .msg_ok li, .msg_error li {
+    list-style: initial;
+    margin-left: 21px;
+    text-align: left;
+}
+</style>
 
 <div id='bg-img' style='background-image:url("img/register-bg.jpg");'></div>
 
@@ -25,7 +48,7 @@ require_once "inc/header.php";
 	</div>
 	
 	<h1>PILOT REGISTRATION</h1>
-	
+	<div id="msgs" class="msgs"></div>
 	<form id='register-form' method='post' class='clearfix' action='inc/register-processor.php'>
 		<?php for ($x = 1; $x <= 8; $x++) { ?>
 			<div id='page-<?php echo $x; ?>' style='display:none' class='register-tab'>
