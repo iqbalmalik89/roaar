@@ -8,7 +8,7 @@ Please enter the type of contract you are looking for (you may choose more than 
 		<i>You may select more than one option</i>
 	</label>
 	<div class='element'>
-		<select name='type-of-work' id='type-of-work'>
+		<select name='type-of-work' id='type_of_work'>
 			<option>Please select</option>
 			<option>Full Time</option>
 			<option>Part Time</option>

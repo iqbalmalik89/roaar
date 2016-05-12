@@ -8,7 +8,7 @@ Please enter your first passport details below
 		Passport Number: *
 	</label>
 	<div class='element'>
-		<input type='text' name='passport1-no' id='passport1-no' placeholder='Enter a Passport Number'>
+		<input type='text' name='passport1-no' id='passport1no' placeholder='Enter a Passport Number'>
 	</div>
 </div>
 
@@ -17,7 +17,7 @@ Please enter your first passport details below
 		Country of issue: *
 	</label>
 	<div class='element'>
-		<select name='passport1-country' id='passport1-country'>
+		<select name='passport1-country' id='passport1country'>
 			<?php require "countrylist.php"; ?>
 		</select>
 	</div>
@@ -42,7 +42,7 @@ Please enter your first passport details below
 </div>
 
 <?php /*********************************************************************/ ?>
-
+<!--
 <h3>PASSPORT 2</h3>
 Please enter your first passport details below
 
@@ -61,7 +61,7 @@ Please enter your first passport details below
 	</label>
 	<div class='element'>
 		<select name='passport2-country' id='passport2-country'>
-			<?php require "countrylist.php"; ?>
+			<?php //require "countrylist.php"; ?>
 		</select>
 	</div>
 </div>
@@ -83,3 +83,4 @@ Please enter your first passport details below
 		<input type='text' class='datepicker' name='passport2-expiry' id='passport2-expiry'>
 	</div>
 </div>
+--!>
