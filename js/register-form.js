@@ -73,7 +73,7 @@ $( 'form' ).submit(function( e ) {
 	donotsubmit = false;
 	$( this ).find( '.datepicker' ).each( function() {
 		var theukformat = $( this ).val();
-		if ( /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/.test(theukformat) || theukformat == "" )
+		/*if ( /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/.test(theukformat) || theukformat == "" )
 		{
 			//do nada
 		}
@@ -93,7 +93,7 @@ $( 'form' ).submit(function( e ) {
 			e.preventDefault();
 			donotsubmit = true;
 			return false;
-		}
+		}*/
 		
 		theukformat = theukformat.split('/');
 		var thecorrectformat = theukformat[2] + "-" + theukformat[1] + "-" + theukformat[0];
