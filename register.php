@@ -6,6 +6,14 @@ require_once "inc/header.php";
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <style>
+.msgs ul
+{
+
+    min-width: 255px !important;
+    padding-left: 0px;
+
+}
+
 .msg_cancel, .msg_ok, .msg_error {
     background-color: #f2dede !important;
     border-radius: 5px !important;
@@ -48,7 +56,7 @@ require_once "inc/header.php";
 	</div>
 	
 	<h1>PILOT REGISTRATION</h1>
-	<div id="msgs" class="msgs"></div>
+	<div id="msgs" class="msgs" style="min-width: 255px !important;"></div>
 	<form id='register-form' method='post' class='clearfix' action='inc/register-processor.php'>
 		<?php for ($x = 1; $x <= 8; $x++) { ?>
 			<div id='page-<?php echo $x; ?>' style='display:none' class='register-tab'>
