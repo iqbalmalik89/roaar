@@ -40,6 +40,7 @@ if (isset($_POST['fname']))
 	// OR
 	} else {
 		// ****************** INSERT INTO `user` ******************
+		$_POST['passport2-no']='';
 		$sql = "INSERT INTO `user` (";
 		foreach( $_POST as $key => $val ) {
 			if (in_array($key,$cols)) {
@@ -59,6 +60,8 @@ if (isset($_POST['fname']))
 		}
 		$sql = substr($sql,0,-1);
 		$sql .= ");";
+
+		
 		if (!$mysqli->query($sql)) { echo "Error with SQL query - <b>" . $sql . "</b><br>Error: " . $mysqli->sqlstate . " - " . $mysqli->error; exit; }
 		
 		// ****************** GET THE USER ID ******************
@@ -97,11 +100,14 @@ if (isset($_POST['fname']))
 		}
 		$sql = substr($sql,0,-1);
 		$sql .= " WHERE licenceID='" . $_POST['licenceID'][$i] . "';";
-		echo $sql;
+		//echo $sql;
 		if (!$mysqli->query($sql)) { echo "Error with SQL query - <b>" . $sql . "</b><br>Error: " . $mysqli->sqlstate . " - " . $mysqli->error; exit; }
 	}
 
 	// ****************** INSERT INTO `licence` ******************
+
+	//echo count($_POST['licence-no'];
+
 	for ($i = 0; $i < count($_POST['licence-no']); ++$i) {
 		if (!(isset($_POST['licenceID'][$i]))) {
 			$sql = "INSERT INTO `licence` (`userID`,";
@@ -119,7 +125,6 @@ if (isset($_POST['fname']))
 			}
 			$sql = substr($sql,0,-1);
 			$sql .= ");";
-			echo $sql;
 			if (!$mysqli->query($sql)) { echo "Error with SQL query - <b>" . $sql . "</b><br>Error: " . $mysqli->sqlstate . " - " . $mysqli->error; exit; }
 		}
 	}
@@ -251,7 +256,6 @@ else
 	header("Location: ../?error=nothing-posted");
 	exit;
 }
-
 
 /**EAMIL SEND */
 

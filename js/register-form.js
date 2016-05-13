@@ -15,6 +15,7 @@ $( '#next-button' ).click( function() {
 	
 	chk_validatation = validateMe(validate_op);
 	if(chk_validatation ==false){
+		goToByScroll('msgs');
 		return false;
 	}
 	$('#msgs').html('');
@@ -733,3 +734,12 @@ function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
+
+function goToByScroll(id){
+        // Remove "link" from the ID
+       // id = id.replace("link", "");
+        // Scroll
+        $('html,body').animate({
+                scrollTop: $("#"+id).offset().top},
+            1000);
+    }
