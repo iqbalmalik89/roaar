@@ -11,8 +11,16 @@ $thissite = "http://roaar.net/dev";
 $adminemail = "cooperk937@hotmail.co.uk";
 
 function dbconnect() {
-//	$mysqli = new mysqli("localhost", "roaar", "jd3hs93kf03j", "roaar");
-	$mysqli = new mysqli("localhost", "root", "", "roaar");
+
+
+	if($_SERVER['HTTP_HOST'] == 'localhost')
+		$mysqli = new mysqli("localhost", "root", "", "roaar");
+	else if($_SERVER['HTTP_HOST'] == 'vegatechnologies.net')
+		$mysqli = new mysqli("localhost", "iqbal89_roaar", "@R~Gokw#M.A{", "iqbal89_roaar");
+	else 
+		$mysqli = new mysqli("localhost", "roaar", "jd3hs93kf03j", "roaar");
+
+
 	/* check connection */
 	if ($mysqli->connect_errno) {
 		printf("Connect failed: %s\n", $mysqli->connect_error);
