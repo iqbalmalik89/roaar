@@ -85,9 +85,13 @@ $( ".datepicker" ).datepicker({
 });
 
 $( ".datepicker" ).attr("placeholder","dd/mm/yyyy");
-
 $( "#dob" ).datepicker( "option", "yearRange", "<?php echo (date("Y")-100); ?>:<?php echo (date("Y")-10); ?>" );
+$( "#history-from" ).datepicker( "option", "yearRange", "<?php echo (date("Y")-60); ?>:<?php echo (date("Y")-0); ?>" );
+$( "#history-to" ).datepicker( "option", "yearRange", "<?php echo (date("Y")-60); ?>:<?php echo (date("Y")-0); ?>" );
+
 </script>
+
+
 <?php
 require_once "inc/footer.php";
 ?>
