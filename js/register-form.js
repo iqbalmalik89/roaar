@@ -112,6 +112,7 @@ $( '#register-form' ).submit(function( e ) {
 			msg_step8+="Passoword mis -matchting|";
 		}
 	}
+
 	if(msg_step8){
 		var formatted_msgs= getFormatedMessages(msg_step8);
 		$('#msgs').addClass('msg_cancel');
@@ -174,7 +175,7 @@ $( '#register-form' ).submit(function( e ) {
 		}
 		
 		var invalid = false;
-		$( ".form-element label:contains('*')" ).each(function() {
+		/*$( ".form-element label:contains('*')" ).each(function() {
 			// *************************************************************************************
 			// THIS NEEDS TO CHANGE TO CATER FOR PROP SELECTED INDEX INSTEAD OF VAL FOR SELECT BOXES
 			// *************************************************************************************
@@ -197,7 +198,7 @@ $( '#register-form' ).submit(function( e ) {
 				invalid = true;
 				return false;
 			}
-		});
+		});*/
 		
 		if (invalid)
 			return false;
