@@ -96,6 +96,27 @@ if ($pagename == 'edit-profile') {
 		</div>
 
 		<div class='form-element'>
+			<label for='supplied-name'>
+				Supplied Name: *
+			</label>
+			<div class='element'>
+				<select name='supplied-name[]' id='supplied-name-id-<?php echo $x; ?>'>
+					<option>Select Supplied Name</option>
+					<option>Passengers</option>
+					<option>Freighters</option>
+ 					<option>Combine</option>
+ 					
+				</select>
+				<?php if ($fillin) { ?>
+				<script>
+				$( '#supplied-name-id-<?php echo $x; ?>' ).val( "<?php echo $thisuser->licences[($x-1)]['supplied-name']; ?>" );
+				</script>
+				<?php } ?>
+			</div>
+		</div>
+
+
+		<div class='form-element'>
 			<label for='licence-typeratings'>
 				Type Ratings: *
 			</label>

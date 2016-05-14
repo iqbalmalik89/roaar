@@ -287,6 +287,20 @@ $("#all-licences").on("click", ".remove-licence", function(){
 });
 
 $( '.save-experience' ).click(function(){
+
+	/*Exp start*/
+	var msg_step5 = '';
+	msg_step5=expValidation();
+	if(msg_step5){
+		formatted_msgs= getFormatedMessages(msg_step5);
+		$('#msgs').addClass('msg_cancel');
+		$('#msgs').html(formatted_msgs);
+		return false;
+	}	
+	
+	$('#msgs').html('');
+	$('#msgs').removeClass('msg_cancel');
+
 	var content = '';
 	content = content + '<input type="hidden" name="exp-aircraft-type[]" value="' + $('#add-aircraft-type').val() + '">';
 	content = content + '<input type="hidden" name="exp-captain-time[]" value="' + $('#add-captain-time').val() + '">';
@@ -309,6 +323,21 @@ $("#my-experiences").on("click", ".remove-exp", function(){
 });
 
 $( '.save-instructor-experience' ).click(function(){
+
+
+	/*Check Validation*/
+	var msg_step6 = '';
+	msg_step6 =instructValidation();
+	if(msg_step6){
+		formatted_msgs= getFormatedMessages(msg_step6);
+		$('#msgs').addClass('msg_cancel');
+		$('#msgs').html(formatted_msgs);
+		return false;
+	}
+	$('#msgs').html('');
+	$('#msgs').removeClass('msg_cancel');
+	/*End of validation*/
+
 	var content = '';
 	content = content + '<input type="hidden" name="instr-exp-instructor-aircraft-type[]" value="' + $('#instructor-aircraft-type').val() + '">';
 	content = content + '<input type="hidden" name="instr-exp-training-type[]" value="' + $('#training-type').val() + '">';
@@ -335,6 +364,21 @@ $("#my-instructor-experiences").on("click", ".remove-instr-exp", function(){
 });
 
 $( '.save-emp-experience' ).click(function(){
+
+/*Validation */
+	var msg_step7 = '';
+	msg_step7 =empExpValidation();
+	if(msg_step7){
+		formatted_msgs= getFormatedMessages(msg_step7);
+		$('#msgs').addClass('msg_cancel');
+		$('#msgs').html(formatted_msgs);
+		return false;
+		}
+	$('#msgs').html('');
+	$('#msgs').removeClass('msg_cancel');
+/*End of Validation*/		
+
+
 	var content = '';
 	var thecompany = '';
 	if ($('#history-airline-company').val() == "other")
@@ -593,10 +637,23 @@ function validateMe(val_obj){
 			msg_coi_type+=  'Country:'+(i)+' of issue is required.|';
 		}
 		}
+
+
+		var msg_supplied_name ='';
+        var lc_type=document.getElementsByName('supplied-name[]'), c, i=0;
+		while(c=lc_type[i++]){
+
+		if(c.value =='Select Supplied Name'){
+			msg_supplied_name+=  'Supllied:'+(i)+' type is required.|';
+		}
+		}
+
+
 		var msg_lc_op_type ='';
         var lc_type=document.getElementsByName('licence-typeratings[]'), c, i=0;
 		while(c=lc_type[i++]){
-		if(c.value =='Please select a country'){
+			
+		if(c.value =='Select a type rating' ||c.value ==''){
 			msg_lc_op_type+=  'Type rating:'+(i)+' is required.|';
 		}
 		}
@@ -615,6 +672,7 @@ function validateMe(val_obj){
 		msg_step4+=msg_step_mul_lcience;
 		msg_step4+=msg_lc_type;
 		msg_step4+=msg_coi_type;
+		msg_step4+=msg_supplied_name
 		msg_step4+=msg_lc_op_type;
 		msg_step4+=msg_date_of_issue;
 		msg_step4+=msg_date_of_ex;
@@ -631,7 +689,7 @@ function validateMe(val_obj){
 			msg_step5='Date of last proficiency is required|';
 		}
 		if($.trim($('#proficiency-renewal').val())==""){
-			msg_step5+='Renewal date is required';
+			msg_step5+='Renewal date is required|';
 		}
 		if($.trim($('#instrument-check').val())==""){
 			msg_step5+='Instrumental last date is required|';
@@ -648,18 +706,37 @@ function validateMe(val_obj){
 		if($.trim($('#total-instructor-time').val())==""){
 			msg_step5+="Total insturctor's time is required|";
 		}
-		if($.trim($('#add-captain-time').val())==""){
+
+
+		/*Exp start*/
+		var exi_value_exp ='';
+		var chk_exit_lc = false;
+		var arr = $('input[type="hidden"][name="exp-captain-time[]"]').map(function(){
+  			exi_value_exp = this.getAttribute("value");
+					if(exi_value_exp){
+						chk_exit_lc= true;	
+					}
+			}).get();
+
+		if(chk_exit_lc==false){
+			msg_step5+=expValidation();
+			/*if($.trim($('#add-captain-time').val())==""){
 			msg_step5+="Add captain's time is required|";
+			}
+			if($.trim($('#add-firstofficer-time').val())==""){
+				msg_step5+="Add first officer's time is required|";
+			}
+			if($.trim($('#add-instructor-time').val())==""){
+				msg_step5+="Add instructor's time is required|";
+			}
+			if($.trim($('#add-dateoflastflight').val())==""){
+				msg_step5+="Date of last flight is required|";
+			}*/
+		/*Exp End*/
+
 		}
-		if($.trim($('#add-firstofficer-time').val())==""){
-			msg_step5+="Add first officer's time is required|";
-		}
-		if($.trim($('#add-instructor-time').val())==""){
-			msg_step5+="Add instructor's time is required|";
-		}
-		if($.trim($('#add-dateoflastflight').val())==""){
-			msg_step5+="Date of last flight is required|";
-		}
+		
+
 		if(msg_step5){
 		formatted_msgs= getFormatedMessages(msg_step5);
 		$('#msgs').addClass('msg_cancel');
@@ -669,8 +746,23 @@ function validateMe(val_obj){
 }
 /*Step -6*/
 if(val_obj.current_page==6){
-	if($.trim($('#training-type').find('option:selected').text())=="Select Type of Training"){ msg_step6+= 'Type of training is required.|';}
-	if($.trim($('#airline-company').find('option:selected').text())=="Select an option"){ msg_step6+= 'Air line comapny is required.|';}
+
+		var exi_value_exp ='';
+		var chk_exit_lc = false;
+		var arr = $('input[type="hidden"][name="instr-exp-training-type[]"]').map(function(){
+  			exi_value_exp = this.getAttribute("value");
+  			
+  			
+					if(exi_value_exp){
+						chk_exit_lc= true;	
+					}
+			}).get();
+		
+	if(!chk_exit_lc){	
+		msg_step6+=instructValidation();
+		//if($.trim($('#training-type').find('option:selected').text())=="Select Type of Training"){ msg_step6+= 'Type of training is required.|';}
+		//if($.trim($('#airline-company').find('option:selected').text())=="Select an option"){ msg_step6+= 'Air line comapny is required.|';}
+	}
 	if(msg_step6){
 		formatted_msgs= getFormatedMessages(msg_step6);
 		$('#msgs').addClass('msg_cancel');
@@ -682,17 +774,34 @@ if(val_obj.current_page==6){
 /*Step -7*/
 if(val_obj.current_page==7){
 	
-	if($.trim($('#history-airline-company').val())==""){msg_step7+="Add you airline is required|";}
-	if($.trim($('#history-from').val())==""){msg_step7+="From date is required|";}
-	if($.trim($('#history-to').val())==""){msg_step7+="To date is required|";}
-	if($.trim($('#history-position').val())==""){msg_step7+="History position is required|";}
-	if($.trim($('#history-leaving').val())==""){msg_step7+="Reason of leaving is required|";}
+	var exi_value_exp ='';
+	var exi_value_exp1 ='';
+	var chk_exit_lc = false;
+	var chk_exit_lc1 = false;
+	var arr = $('input[type="hidden"][name="exp-history-airline-company[]"]').map(function(){
+  				exi_value_exp = this.getAttribute("value");
+  				if(exi_value_exp){
+					chk_exit_lc= true;	
+				}
+			}).get();
+
+	$('input[type="hidden"][name="exp-history-position[]"]').map(function(){
+  				exi_value_exp1 = this.getAttribute("value");
+  				if(exi_value_exp1){
+					chk_exit_lc1= true;	
+				}
+			}).get();
+		
+	if(chk_exit_lc==false || chk_exit_lc1==false){	
+		msg_step7+=instructValidation();
+	}
+
 	if(msg_step7){
 		formatted_msgs= getFormatedMessages(msg_step7);
 		$('#msgs').addClass('msg_cancel');
 		$('#msgs').html(formatted_msgs);
 		return false;
-		}
+	}
 }
 /*Step -8*/
 if(val_obj.current_page==8){
@@ -742,4 +851,42 @@ function goToByScroll(id){
         $('html,body').animate({
                 scrollTop: $("#"+id).offset().top},
             1000);
-    }
+ }
+
+ function expValidation(){
+
+		var msg_step5='';
+		if($.trim($('#add-captain-time').val())==""){
+			msg_step5+="Add captain's time is required|";
+		}
+		if($.trim($('#add-firstofficer-time').val())==""){
+			msg_step5+="Add first officer's time is required|";
+		}
+		if($.trim($('#add-instructor-time').val())==""){
+			msg_step5+="Add instructor's time is required|";
+		}
+		if($.trim($('#add-dateoflastflight').val())==""){
+			msg_step5+="Date of last flight is required|";
+		}
+		return msg_step5;
+		/*Exp End*/
+		
+}
+
+ function instructValidation(){
+ 	var msg_step6 ='';
+	if($.trim($('#training-type').find('option:selected').text())=="Select Type of Training"){ msg_step6+= 'Type of training is required.|';}
+	if($.trim($('#airline-company').find('option:selected').text())=="Select an option"){ msg_step6+= 'Air line comapny is required.|';}
+	return msg_step6;
+
+ }
+
+ function empExpValidation(){
+ 	var msg_step7='';
+ 	if($.trim($('#history-airline-company').val())==""){msg_step7+="Add you airline is required|";}
+	if($.trim($('#history-from').val())==""){msg_step7+="From date is required|";}
+	if($.trim($('#history-to').val())==""){msg_step7+="To date is required|";}
+	if($.trim($('#history-position').val())==""){msg_step7+="History position is required|";}
+	if($.trim($('#history-leaving').val())==""){msg_step7+="Reason of leaving is required|";}
+	return msg_step7;
+ }
