@@ -109,7 +109,9 @@ if (isset($_POST['fname']))
 	//echo count($_POST['licence-no'];
 
 	for ($i = 0; $i < count($_POST['licence-no']); ++$i) {
-		if (!(isset($_POST['licenceID'][$i]))) {
+		//if (!(isset($_POST['licenceID'][$i]))) {
+		if ((empty($_POST['licenceID'][$i]))) {
+		
 			$sql = "INSERT INTO `licence` (`userID`,";
 			foreach( $_POST as $key => $val ) {
 				if (in_array($key,$cols)) {
@@ -127,6 +129,7 @@ if (isset($_POST['fname']))
 			$sql .= ");";
 			if (!$mysqli->query($sql)) { echo "Error with SQL query - <b>" . $sql . "</b><br>Error: " . $mysqli->sqlstate . " - " . $mysqli->error; exit; }
 		}
+			//exit($sql);
 	}
 
 
@@ -150,7 +153,9 @@ if (isset($_POST['fname']))
 	
 	// ****************** INSERT INTO `experience` ******************
 	for ($i = 0; $i < count($_POST['exp-aircraft-type']); ++$i) {
-		if (!(isset($_POST['experienceID'][$i]))) {
+		//if (!(isset($_POST['experienceID'][$i]))) {
+		if ((empty($_POST['experienceID'][$i]))) {
+		
 			$sql = "INSERT INTO `experience` (`userID`,";
 			foreach( $_POST as $key => $val ) {
 				if (in_array($key,$cols)) {
@@ -190,7 +195,9 @@ if (isset($_POST['fname']))
 	
 	// ****************** INSERT INTO `history` ******************
 	for ($i = 0; $i < count($_POST['exp-history-airline-company']); ++$i) {
-		if (!(isset($_POST['experienceID'][$i]))) {
+		//if (!(isset($_POST['experienceID'][$i]))) {
+		if ((empty($_POST['experienceID'][$i]))) {
+		
 			$sql = "INSERT INTO `history` (`userID`,";
 			foreach( $_POST as $key => $val ) {
 				if (in_array($key,$cols)) {
@@ -231,7 +238,9 @@ if (isset($_POST['fname']))
 	
 	// ****************** INSERT INTO `instructor-experience` ******************
 	for ($i = 0; $i < count($_POST['instr-exp-instructor-aircraft-type']); ++$i) {
-		if (!(isset($_POST['instr-experienceID'][$i]))) {
+		//if (!(isset($_POST['instr-experienceID'][$i]))) {
+		if ((empty($_POST['instr-experienceID'][$i]))) {
+		
 			$sql = "INSERT INTO `instructor-experience` (`userID`,";
 			foreach( $_POST as $key => $val ) {
 				if (in_array($key,$cols)) {
