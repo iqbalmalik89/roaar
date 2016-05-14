@@ -19,7 +19,11 @@
 		<input type='text' class='datepicker' name='medical-dateexp' id='medical-dateexp'>
 	</div>
 </div>
-
+<style>
+.hideClass{
+display: block !important;
+}
+</style>
 <?php /*
 <h3>ALL LICENCE TYPES</h3>
 
@@ -144,7 +148,23 @@ if ($pagename == 'edit-profile') {
 
 		<div class='form-element'>
 			<label for='licence-expire' style="width:12px;">
-				<input onclick="expiryCheck(this, <?php echo $x ;?>);" type='checkbox'  style="width:12px;" name='license_expire[]' id='license_expire-<?php echo $x; ?>' value="<?php if ($fillin) { echo $thisuser->licences[($x-1)]['licence_expire']; } ?>">				
+				<?php
+				
+				$check="";
+				$class_add = '';
+				
+				if($fillin) {
+						 if($thisuser->licences[($x-1)]['license_expire']==1){
+						 	$class_add= 'hideClass';
+						 	$check = "checked";
+						 	
+					 	
+						 }
+					}
+
+
+				?>
+				<input  class='hide_this' onclick="expiryCheck(this, <?php echo $x ;?>);" type='checkbox'  style="width:12px;" name='license_expire[]' id='license_expire-<?php echo $x; ?>' value="1"   <?php echo $check;?>>				
 			</label>Does your license have an expiry date?
 			<div class='element'>
 
@@ -152,7 +172,7 @@ if ($pagename == 'edit-profile') {
 		</div>
 
 
-		<div class='form-element licenseexpire' style="display:none;" id="licenseexp<?php echo $x; ?>">
+		<div class='form-element licenseexpire <?php echo $class_add;?>' style="display:none;" id="licenseexp<?php echo $x; ?>">
 			<label for='licence-doe'>
 				Date of Expiry: *
 			</label>

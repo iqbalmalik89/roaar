@@ -36,6 +36,7 @@ require_once "inc/header.php";
     margin-left: 21px;
     text-align: left;
 }
+
 </style>
 
 <div id='bg-img' style='background-image:url("img/register-bg.jpg");'></div>
@@ -85,7 +86,7 @@ $( ".datepicker" ).datepicker({
 });
 
 $( ".datepicker" ).attr("placeholder","dd/mm/yyyy");
-$( "#dob" ).datepicker( "option", "yearRange", "<?php echo (date("Y")-100); ?>:<?php echo (date("Y")-10); ?>" );
+$( "#dob").datepicker( "option", "yearRange", "<?php echo (date("Y")-100); ?>:<?php echo (date("Y")-10); ?>" );
 $( "#history-from" ).datepicker( "option", "yearRange", "<?php echo (date("Y")-76); ?>:<?php echo (date("Y")-0); ?>" );
 $( "#history-to" ).datepicker( "option", "yearRange", "<?php echo (date("Y")-76); ?>:<?php echo (date("Y")-0); ?>" );
 

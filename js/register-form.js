@@ -665,9 +665,15 @@ function validateMe(val_obj){
 		}
 		var msg_date_of_ex ='';
         var chks = document.getElementsByName('licence-doe[]');
-        for (var i = 0; i < chks.length; i++) {   
-			if (chks[i].value=="") { msg_date_of_issue+=  'Date of expiry:'+(i+1)+'  is required.|';}
-		}
+       // for (var i = 0; i < chks.length; i++) { 
+       	i =0;
+        $("input[name='license_expire[]']:checked").each(function (i){
+        	if (chks[i].value=="") { msg_date_of_issue+=  'Date of expiry:'+(i+1)+'  is required.|';}
+        	
+		
+		});
+		
+        //}
 		
 		msg_step4+=msg_step_mul_lcience;
 		msg_step4+=msg_lc_type;
