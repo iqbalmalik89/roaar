@@ -122,6 +122,16 @@ if ($pagename == 'edit-profile') {
 		</div>
 
 		<div class='form-element'>
+			<label for='licence-expire' style="width:12px;">
+				<input onclick="expiryCheck(this, <?php echo $x ;?>);" type='checkbox'  style="width:12px;" name='license_expire[]' id='license_expire-<?php echo $x; ?>' value="<?php if ($fillin) { echo $thisuser->licences[($x-1)]['licence_expire']; } ?>">				
+			</label>Does your license have an expiry date?
+			<div class='element'>
+
+			</div>
+		</div>
+
+
+		<div class='form-element licenseexpire' style="display:none;" id="licenseexp<?php echo $x; ?>">
 			<label for='licence-doe'>
 				Date of Expiry: *
 			</label>
@@ -132,3 +142,12 @@ if ($pagename == 'edit-profile') {
 	</div>
 	<?php } ?>
 </div>
+<script type="text/javascript">
+	function expiryCheck(obj, x)
+	{
+		if($(obj).is(":checked"))
+			$(obj).parent().parent().next().show();
+		else
+			$(obj).parent().parent().next().hide();
+	}
+</script>
